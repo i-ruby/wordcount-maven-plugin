@@ -6,7 +6,7 @@ jobs:
       - image: circleci/openjdk:8-jdk-buster
     steps:
       - checkout
-      - run: ./mvn test
+      - run: mvn test
 
   build:
     docker:
@@ -17,7 +17,7 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }} # appends cache key with a hash of pom.xml file
             - v1-dependencies- # fallback in case previous cache key is not found
-      - run: ./mvn -Dmaven.test.skip=true package
+      - run: mvn -Dmaven.test.skip=true package
       - save_cache:
           paths:
             - ~/.m2
