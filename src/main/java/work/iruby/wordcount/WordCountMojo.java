@@ -83,7 +83,7 @@ public class WordCountMojo extends AbstractMojo {
         try {
             Files.walkFileTree(basedir, new SimpleFileVisitor<Path>() {
                 @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     Objects.requireNonNull(file);
                     Objects.requireNonNull(attrs);
                     if (file.toString().endsWith(".java")) {
@@ -126,7 +126,6 @@ public class WordCountMojo extends AbstractMojo {
                                     .split("\\s+")))
                     .filter(w -> !w.isEmpty())
                     .forEach(w -> map.merge(w, 1, Integer::sum));
-
         } catch (IOException e) {
             throw new RuntimeException("文件解析出错", e);
         }
